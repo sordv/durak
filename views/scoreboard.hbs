@@ -1,0 +1,22 @@
+<p>Таблица лидеров</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Никнейм</th>
+            <th>Рейтинг</th>
+            <th>Победы</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each players}}
+            <tr>
+                <td>{{this.login}}</td>
+                <td>{{this.rating}}</td>
+                <td>{{this.wins}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<a href="/">Назад</a>

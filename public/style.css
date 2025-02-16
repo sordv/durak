@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* MAIN MENU - START */
+
+.main-menu-name {
+    text-align: center;
+    font-size: 36px;
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 30vh;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-menu-button-play {
+    padding: 20px 90px;
+    font-size: 28px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+.main-menu-button-play:hover {
+    background-color: #0056b3;
+}
+
+.main-menu-button-scoreboard {
+    padding: 10px 24px;
+    font-size: 20px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.main-menu-button-scoreboard:hover {
+    background-color: #0056b3;
+}
+
+/* MAIN MENU - END */
+
+/* SCOREBOARD MENU - START */
+
+/* SCOREBOARD MENU - END */
