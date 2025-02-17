@@ -10,6 +10,8 @@ const hbs = exphbs.create({
 })
 
 app.use(express.static('public'))
+app.use(express.json())
+app.use(express.urlencoded({ extended : true }))
 
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
@@ -35,11 +37,10 @@ app.get('/scoreboard', async (req, res) => {
 
         res.render('scoreboard', { players })
     } catch (err) {
-        console.error('Database querry FAILED:', err)
+        console.error('Database query FAILED:', err)
         res.status(500).send('Ошибка сервера')
     }
 })
-
 
 const PORT = process.env.PORT || 2000
 
