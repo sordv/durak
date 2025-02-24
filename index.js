@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const { Pool } = require('pg')
+const session = require('express-session')
 
 const app = express()
 
@@ -11,7 +12,13 @@ const hbs = exphbs.create({
 
 app.use(express.static('public'))
 app.use(express.json())
-app.use(express.urlencoded({ extended : true }))
+app.use(express.urlencoded({ extended: true }))
+
+app.use(session({
+    secret: 'secret key',
+    resave: false,
+    saveUninitialized: false
+}))
 
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
@@ -42,7 +49,15 @@ app.get('/scoreboard', async (req, res) => {
     }
 })
 
-const PORT = process.env.PORT || 2000
+app.get('/login', (req, res) => {
+    res.render('login')
+})
+
+app.get('/register', (req, res) => {
+    res.render('register')
+})
+
+const PORT = process.env.PORT || 2001
 
 app.listen(PORT, () => {
     console.log(`SERVER HAS BEEN STARTED: http://localhost:${PORT}`)
