@@ -1,5 +1,18 @@
 <h1>Регистрация аккаунта</h1>
 
+<form action="/register" method="POST">
+    <label for="login">Логин:</label><br>
+    <input type="text" id="login" name="login" required><br><br>
+
+    <label for="password">Пароль:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <label for="confirm_password">Повторите пароль:</label><br>
+    <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+
+    <input type="submit" value="Зарегистрироваться">
+</form>
+
 <h4>Есть аккаунт? <a href="/login">Войдите!</a></h4>
 
 <a href="/">Назад</a>
