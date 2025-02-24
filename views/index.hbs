@@ -5,4 +5,14 @@
     <a href='/scoreboard'><button class='main-menu-button-scoreboard'>Таблица лидеров</button>
 </div>
 
-<a href="/login">Войти</a>
+{{#if isLogin}}
+    <p>Выполнен вход</p>
+
+    <form action="/logout" method="POST" style="display: inline;">
+        <button type="submit" class="main-menu-button-logout">Выйти</button>
+    </form>
+{{else}}
+    <p>Вход не выполнен</p>
+
+    <a href="/login"><button class="main-menu-button-login">Войти</button></a>
+{{/if}}
