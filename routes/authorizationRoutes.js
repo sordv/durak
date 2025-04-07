@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
         res.redirect('/')
     } catch (err) {
         console.error('Ошибка при входе:', err)
-        res.status(500).send('Ошибка сервера')
+        res.status(500).send('Ошибка сервера.')
     }
 })
 
@@ -45,8 +45,12 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
     const { login, password, confirm_password } = req.body
 
+    if (password.length < 8) {
+        return res.status(400).send('Пароль должен содержать не менее 8 символов!')
+    }
+
     if (password !== confirm_password) {
-        return res.status(400).send('Пароли не совпадают')
+        return res.status(400).send('Пароли не совпадают!')
     }
 
     try {
@@ -55,7 +59,7 @@ router.post('/register', async (req, res) => {
         )
 
         if (userExists.rows.length > 0) {
-            return res.status(400).send('Пользователь с таким логином уже существует')
+            return res.status(400).send('Пользователь с таким логином уже существует!')
         }
 
         await pool.query(
@@ -66,7 +70,7 @@ router.post('/register', async (req, res) => {
         res.redirect('/login')
     } catch (err) {
         console.error('Ошибка при регистрации:', err)
-        res.status(500).send('Ошибка сервера')
+        res.status(500).send('Ошибка сервера.')
     }
 })
 
@@ -75,7 +79,7 @@ router.post('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             console.error('Ошибка при выходе из аккаунта:', err)
-            return res.status(500).send('Ошибка сервера')
+            return res.status(500).send('Ошибка сервера.')
         }
         res.redirect('/')
     })

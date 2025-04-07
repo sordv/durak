@@ -1,0 +1,47 @@
+<div class="game-container">
+    <div class="bot-area">
+        <div class="bot-cards">
+            {{#each botHand}}
+            <img src="icons/game/Back.png" class="card" alt="botCard">
+            <!--
+            <img src="icons/cards/{{this.suit}}_{{this.rank}}.png" class="card" alt="{{this.suit}} {{this.rank}}">
+            -->
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="middle-area">
+        <div class="deck-area">
+            <div class="card">
+                <img src="icons/game/Back.png" class="card" alt="deck">
+            </div>
+    
+            <div class="card">
+                {{#each currentDeck}}
+                {{#if @last}}
+                <img src="icons/cards/{{this.suit}}_{{this.rank}}.png" class="card" alt="trump: {{this.suit}} {{this.rank}}">
+                {{/if}}
+                {{/each}}
+            </div>
+
+            <div class="deck-count">{{currentDeck.length}}</div>
+
+            <div class="card">
+                <img src="icons/game/{{this.trump}}.png" class="card" alt="trump: {{this.trump}}">
+            </div>
+        </div>
+
+        <div class="table-area">
+        </div>
+    </div>
+
+    <div class="player-area">
+        <div class="player-cards">
+            {{#each playerHand}}
+            <img src="{{this.skin}}" class="card jump-card" alt="{{this.suit}} {{this.rank}}">
+            {{/each}}
+        </div>
+    </div>
+</div> 
+
+<a href="/"><button class="game-button-exit">Выход</button></a>

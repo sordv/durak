@@ -3,7 +3,7 @@ const router = express.Router()
 
 // / RENDER
 router.get('/', (req, res) => {
-    const isLogin = !!req.session.userId
+    const isLogin = Boolean(req.session.userId)
     res.render('index', {isLogin})
 })
 

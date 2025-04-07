@@ -15,7 +15,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use(session({
-    secret: 'secret key',
+    secret: 'password key',
     resave: false,
     saveUninitialized: false
 }))
@@ -25,7 +25,7 @@ app.set('view engine', 'hbs')
 
 app.use('/', routes)
 
-const PORT = process.env.PORT || 2006
+const PORT = 2007
 
 app.listen(PORT, () => {
     console.log(`SERVER HAS BEEN STARTED: http://localhost:${PORT}`)

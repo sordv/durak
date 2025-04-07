@@ -1,20 +1,16 @@
 <p class="main-menu-name">DURAK</p>
 
-{{#if isLogin}}
-    <p>Выполнен вход</p>
-{{else}}
-    <p>Вход не выполнен</p>
-{{/if}}
-
 <div class='main-menu'>
-    <a href='/play'></a><button class='main-menu-button-play'>Играть</button>
-    <a href='/scoreboard'><button class='main-menu-button-scoreboard'>Таблица лидеров</button>
+    <a href='/game'><button class='main-menu-button-game'>Играть</button></a>
+    <a href='/scoreboard'><button class='main-menu-button-scoreboard'>Таблица лидеров</button></a>
 </div>
 
 {{#if isLogin}}
-    <form action="/logout" method="POST" style="display: inline;">
-        <button type="submit" class="main-menu-button-logout">Выйти</button>
-    </form>
+<p>Выполнен вход</p>
+<form action="/logout" method="POST" style="display: inline;">
+    <button type="submit" class="main-menu-button-logout">Выйти</button>
+</form>
 {{else}}
-    <a href="/login"><button class="main-menu-button-login">Войти</button></a>
+<p>Вход не выполнен</p>
+<a href="/login"><button class="main-menu-button-login">Войти</button></a>
 {{/if}}

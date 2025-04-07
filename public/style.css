@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-.main-menu-button-play {
+.main-menu-button-game {
     padding: 20px 90px;
     font-size: 28px;
     color: white;
@@ -33,7 +33,7 @@
     transition: background-color 0.3s;
 }
 
-.main-menu-button-play:hover {
+.main-menu-button-game:hover {
     background-color: #0056b3;
 }
 
@@ -56,3 +56,62 @@
 /* SCOREBOARD MENU - START */
 
 /* SCOREBOARD MENU - END */
+
+/* GAME - START */
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 20px;
+    justify-content: space-between;
+    background-color: antiquewhite;
+}
+
+.bot-area, .player-area {
+    display: flex;
+    justify-content: center;
+}
+
+.player-cards, .bot-cards {
+    display: flex;
+    gap: 10px;
+}
+
+.card {
+    width: 78px;
+    height: 130px;
+    object-fit: cover;
+}
+
+.jump-card:hover {
+    transform: translateY(-10px);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.deck-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.deck-count {
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.game-button-exit {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* GAME - END */
