@@ -5,6 +5,7 @@ const router = express.Router()
 router.get('/', (req, res) => {
     const isLogin = Boolean(req.session.userId)
     res.render('index', {isLogin})
+    req.session.game = null
 })
 
 module.exports = router

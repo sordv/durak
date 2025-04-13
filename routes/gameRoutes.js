@@ -8,7 +8,7 @@ router.get('/game', (req, res) => {
         return res.redirect('/login')
     }
 
-    const game = new Game()
+    const game = req.session.game || new Game()
     req.session.game = game
 
     res.render('game', {
