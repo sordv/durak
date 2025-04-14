@@ -15,7 +15,9 @@ router.get('/game', (req, res) => {
         currentDeck: game.currentDeck,
         playerHand: game.playerHand,
         botHand: game.botHand,
-        trump: game.trump
+        trump: game.trump,
+        attackZone: game.attackZone,
+        defenseZone: game.defenseZone
     })
 })
 

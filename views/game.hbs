@@ -2,9 +2,10 @@
     <div class="bot-area">
         <div class="bot-cards">
             {{#each botHand}}
-            <img src="icons/game/Back.png" class="card" alt="botCard">
-            <!--
             <img src="icons/cards/{{this.suit}}_{{this.rank}}.png" class="card" alt="{{this.suit}} {{this.rank}}">
+            
+            <!--
+            <img src="icons/game/Back.png" class="card" alt="botCard">
             -->
             {{/each}}
         </div>
@@ -12,10 +13,6 @@
 
     <div class="middle-area">
         <div class="deck-area">
-            <div class="card">
-                <img src="icons/game/Back.png" class="card" alt="deck">
-            </div>
-    
             <div class="card">
                 {{#each currentDeck}}
                 {{#if @last}}
@@ -32,6 +29,18 @@
         </div>
 
         <div class="table-area">
+            <div class="attack-zone">
+                <p class="deck-count">Attack:</p>
+                {{#each attackZone}}
+                <img src="icons/cards/{{this.suit}}_{{this.rank}}.png" class="card" alt="{{this.suit}} {{this.rank}}">
+                {{/each}}
+            </div>
+            <div class="defense-zone">
+                <p class="deck-count">Defense:</p>
+                {{#each defenseZone}}
+                <img src="icons/cards/{{this.suit}}_{{this.rank}}.png" class="card" alt="{{this.suit}} {{this.rank}}">
+                {{/each}}
+            </div>
         </div>
     </div>
 
