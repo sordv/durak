@@ -1,5 +1,6 @@
 const { randomInt } = require('crypto');
-const { allCards } = require('./card.js')
+const { allCards } = require('./card.js');
+const { monitorEventLoopDelay } = require('perf_hooks');
 
 class Game {
     constructor() {
@@ -12,6 +13,7 @@ class Game {
         this.defenseZone = []
         this.getStartCards()
         this.createTrump()
+        this.firstTurnOwner()
     }
 
     randomizeDeck(oldDeck) {
@@ -55,6 +57,30 @@ class Game {
     createTrump() {
         const lastCard = this.currentDeck[this.currentDeck.length - 1]
         this.trump = lastCard.suit
+    }
+
+    firstTurnOwner() {
+        const lowestPlayerTrump = this.getLowestTrump(this.playerHand)
+        const lowestBotTrump = this.getLowestTrump(this.botHand)
+
+        if ((!lowestPlayerTrump && lowestBotTrump) || 
+        (lowestPlayerTrump && lowestBotTrump && lowestPlayerTrump.rank > lowestBotTrump.rank)) {
+            this.isPlayerTurn = false
+        } else { this.isPlayerTurn = true }
+    }
+
+    getLowestTrump(hand) {
+        let lowestTrump = null;
+        
+        for (const card of hand) {
+            if (card.suit === this.trump) {
+                if (!lowestTrump || parseInt(card.id) < parseInt(lowestTrump.id)) {
+                    lowestTrump = card;
+                }
+            }
+        }
+        
+        return lowestTrump;
     }
 }
 

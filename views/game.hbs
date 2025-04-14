@@ -29,6 +29,13 @@
         </div>
 
         <div class="table-area">
+            <div class="turn-indicator">
+                {{#if isPlayerTurn}}
+                    <p class="deck-count">ВАШ ХОД</h2>
+                {{else}}
+                    <p class="deck-count">ХОД СОПЕРНИКА</h2>
+                {{/if}}
+            </div>
             <div class="attack-zone">
                 <p class="deck-count">Attack:</p>
                 {{#each attackZone}}
@@ -52,5 +59,9 @@
         </div>
     </div>
 </div> 
+
+<form action="/change-turn" method="POST">
+    <button type="submit" class="game-button-exit">Сменить ход</button>
+</form>
 
 <a href="/"><button class="game-button-exit">Выход</button></a>
