@@ -59,21 +59,56 @@
 
 /* GAME - START */
 
+.all-visual {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.game-info {
+    width: 200px;
+    background-color: #f5f5dc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.deck-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid red;
+}
+
+.deck-count {
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+}
+
 .game-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    padding: 20px;
-    justify-content: space-between;
+    flex: 1;
     background-color: antiquewhite;
-    gap: 10px;
-    border: 2px solid black;
 }
 
-.bot-area, .player-area {
+.bot-area {
     display: flex;
     justify-content: center;
-    border: 2px solid purple;
+    padding: 20px 20px 0 20px;
+    background-color: rgb(169, 255, 186);
+    height: 20vh;
+}
+
+.player-area {
+    display: flex;
+    justify-content: center;
+    padding: 0 20px 20px 20px;
+    background-color: rgb(169, 255, 186);
+    height: 20vh;
 }
 
 .player-cards, .bot-cards {
@@ -93,43 +128,20 @@
     cursor: pointer;
 }
 
-.middle-area {
-    display: flex;
-    flex-direction: row;
-    left: 20px;
-    right: 20px;
-    top: 50%;
-    gap: 40px;
-}
-
-.deck-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border: 2px solid red;
-}
-
-.deck-count {
-    color: black;
-    font-weight: bold;
-    font-size: 24px;
+.down-jump-card:hover {
+    transform: translateY(10px);
+    transition: transform 0.3s;
+    cursor: pointer;
 }
 
 .table-area {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 1;
     justify-content: center;
     align-items: center;
     border: 2px solid red;
     gap: 10px;
-}
-
-.attack-zone, .defense-zone {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    border: 2px solid green;
 }
 
 .game-button-exit {
@@ -141,3 +153,34 @@
 }
 
 /* GAME - END */
+
+.dragging {
+    opacity: 0.5;
+    transform: scale(1.1);
+}
+
+.card-slot {
+    display: flex;
+    gap: 5px;
+    margin: 5px;
+}
+
+.attack-slot, .defense-slot {
+    width: 59px;
+    height: 98px;
+    border-radius: 5px;
+}
+
+.attack-slot {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.defense-slot {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+
+.card-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

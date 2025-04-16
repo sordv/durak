@@ -25,7 +25,7 @@ app.set('view engine', 'hbs')
 
 app.use('/', routes)
 
-const PORT = 2007
+const PORT = 2025
 
 app.listen(PORT, () => {
     console.log(`SERVER HAS BEEN STARTED: http://localhost:${PORT}`)

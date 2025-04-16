@@ -8,8 +8,6 @@ class Game {
         this.botHand = []
         this.trump = null
         this.isPlayerTurn = null
-        this.attackZone = []
-        this.defenseZone = []
         this.getStartCards()
         this.createTrump()
         this.firstTurnOwner()

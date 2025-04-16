@@ -1,61 +1,63 @@
-<div class="game-container">
-    <div class="bot-area">
-        <div class="bot-cards">
-            {{#each botHand}}
-            <img src="icons/cards/{{this.suit}}_{{this.rank}}.png" class="card" alt="{{this.suit}} {{this.rank}}">
-            {{/each}}
-        </div>
-    </div>
+<script>
+    const gameState = {
+        isPlayerTurn: {{isPlayerTurn}},
+        playerHand: {{{json playerHand}}},
+        botHand: {{{json botHand}}}
+    }
+</script>
 
-    <div class="middle-area">
+<div class="all-visual">
+    <div class="game-info">
         <div class="deck-area">
             <div class="card">
                 {{#each currentDeck}}
                 {{#if @last}}
-                <img src="icons/cards/{{this.suit}}_{{this.rank}}.png" class="card" alt="trump: {{this.suit}} {{this.rank}}">
+                <img src="{{this.skin}}" class="card" alt="trump: {{this.suit}} {{this.rank}}">
                 {{/if}}
                 {{/each}}
             </div>
 
-            <div class="deck-count">{{currentDeck.length}}</div>
+            <div class="deck-count">
+                {{currentDeck.length}}
+            </div>
 
             <div class="card">
                 <img src="icons/game/{{this.trump}}.png" class="card" alt="trump: {{this.trump}}">
             </div>
+
+            <div class="turn-indicator">
+                {{#if isPlayerTurn}}
+                    <p class="deck-count">нижний</p>
+                {{else}}
+                    <p class="deck-count">верхний</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <div class="bot-area">
+            <div class="bot-cards">
+                {{#each botHand}}
+                <img src="{{this.skin}}" class="card down-jump-card" alt="{{this.suit}} {{this.rank}}" data-card-id="{{this.id}}">
+                {{/each}}
+            </div>
         </div>
 
         <div class="table-area">
-            <div class="turn-indicator">
-                {{#if isPlayerTurn}}
-                    <p class="deck-count">ВАШ ХОД</h2>
-                {{else}}
-                    <p class="deck-count">ХОД СОПЕРНИКА</h2>
-                {{/if}}
-            </div>
-            <div class="attack-zone">
-                <p class="deck-count">Attack:</p>
-                {{#each attackZone}}
-                <img src="icons/cards/{{this.suit}}_{{this.rank}}.png" class="card" alt="{{this.suit}} {{this.rank}}">
-                {{/each}}
-            </div>
-            <div class="defense-zone">
-                <p class="deck-count">Defense:</p>
-                {{#each defenseZone}}
-                <img src="icons/cards/{{this.suit}}_{{this.rank}}.png" class="card" alt="{{this.suit}} {{this.rank}}">
-                {{/each}}
-            </div>
+                <!-- Слоты создаются в gameLogic.js -->
         </div>
-    </div>
 
-    <div class="player-area">
-        <div class="player-cards">
-            {{#each playerHand}}
-            <img src="{{this.skin}}" class="card jump-card" alt="{{this.suit}} {{this.rank}}">
-            {{/each}}
+        <div class="player-area">
+            <div class="player-cards">
+                {{#each playerHand}}
+                <img src="{{this.skin}}" class="card jump-card" alt="{{this.suit}} {{this.rank}}" data-card-id="{{this.id}}">
+                {{/each}}
+            </div>
         </div>
     </div>
-</div> 
+</div>
 
 <a href="/"><button class="game-button-exit">Выход</button></a>
 
-<script src="/scripts/gameLogic.js"></script>
+<script src="/scripts/cardController.js"></script>

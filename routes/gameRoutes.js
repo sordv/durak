@@ -2,6 +2,12 @@ const express = require('express')
 const router = express.Router()
 const Game = require('../objects/game')
 
+//helper
+router.use((req, res, next) => {
+    res.locals.json = obj => JSON.stringify(obj).replace(/<\/script>/g, '<\\/script>')
+    next()
+})
+
 // GAME RENDER
 router.get('/game', (req, res) => {
     // check authorization
@@ -17,9 +23,7 @@ router.get('/game', (req, res) => {
         playerHand: game.playerHand,
         botHand: game.botHand,
         trump: game.trump,
-        isPlayerTurn: game.isPlayerTurn,
-        attackZone: game.attackZone,
-        defenseZone: game.defenseZone
+        isPlayerTurn: game.isPlayerTurn
     })
 })
 
