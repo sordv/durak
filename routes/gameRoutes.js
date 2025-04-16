@@ -4,11 +4,14 @@ const Game = require('../objects/game')
 
 // GAME RENDER
 router.get('/game', (req, res) => {
+    // check authorization
     if (!req.session.userId) { return res.redirect('/login') }
 
+    // load or create a game
     const game = req.session.game || new Game()
     req.session.game = game
 
+    // game render
     res.render('game', {
         currentDeck: game.currentDeck,
         playerHand: game.playerHand,
@@ -18,16 +21,6 @@ router.get('/game', (req, res) => {
         attackZone: game.attackZone,
         defenseZone: game.defenseZone
     })
-})
-
-// TEMPORARY CHANGE TURN OWNER
-router.post('/change-turn', (req, res) => {
-    if (!req.session.game) {
-        return res.redirect('/game')
-    }
-    
-    req.session.game.isPlayerTurn = !req.session.game.isPlayerTurn
-    res.redirect('/game')
 })
 
 module.exports = router

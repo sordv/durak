@@ -82,8 +82,8 @@
 }
 
 .card {
-    width: 78px;
-    height: 130px;
+    width: 59px; /*39*/
+    height: 98px; /*65*/
     object-fit: cover;
 }
 
@@ -126,8 +126,9 @@
 
 .attack-zone, .defense-zone {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    gap: 10px;
     border: 2px solid green;
 }
 

@@ -3,10 +3,6 @@
         <div class="bot-cards">
             {{#each botHand}}
             <img src="icons/cards/{{this.suit}}_{{this.rank}}.png" class="card" alt="{{this.suit}} {{this.rank}}">
-            
-            <!--
-            <img src="icons/game/Back.png" class="card" alt="botCard">
-            -->
             {{/each}}
         </div>
     </div>
@@ -60,8 +56,6 @@
     </div>
 </div> 
 
-<form action="/change-turn" method="POST">
-    <button type="submit" class="game-button-exit">Сменить ход</button>
-</form>
-
 <a href="/"><button class="game-button-exit">Выход</button></a>
+
+<script src="/scripts/gameLogic.js"></script>

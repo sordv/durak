@@ -1,6 +1,5 @@
-const { randomInt } = require('crypto');
-const { allCards } = require('./card.js');
-const { monitorEventLoopDelay } = require('perf_hooks');
+const { randomInt } = require('crypto')
+const { allCards } = require('./card.js')
 
 class Game {
     constructor() {
@@ -8,7 +7,7 @@ class Game {
         this.playerHand = []
         this.botHand = []
         this.trump = null
-        this.isPlayerTurn = true
+        this.isPlayerTurn = null
         this.attackZone = []
         this.defenseZone = []
         this.getStartCards()
@@ -35,52 +34,59 @@ class Game {
             if (!this.hasTooMuchSameSuits(forPlayer) && !this.hasTooMuchSameSuits(forBot)) {
                 isValidDeck = true
             }
-        }
-        
+        } 
         return newDeck
     }
 
     hasTooMuchSameSuits(cards) {
         const suitCount = {}
         for (const card of cards) {
-            suitCount[card.suit] = (suitCount[card.suit] || 0) + 1
+            if (!suitCount[card.suit]) { suitCount[card.suit] = 0 }
+            suitCount[card.suit] += 1
             if (suitCount[card.suit] >= 5) return true
         }
         return false
     }
 
+    createTrump() {
+        const lastCard = this.currentDeck[this.currentDeck.length - 1]
+        this.trump = lastCard.suit
+        for (const card of this.currentDeck) {
+            if (card.suit === this.trump) { card.isTrump = true }
+        }
+        this.playerHand.forEach(card => { card.isTrump = card.suit === this.trump })
+        this.botHand.forEach(card => { card.isTrump = card.suit === this.trump })
+    }
+    
     getStartCards() {
         this.playerHand = this.currentDeck.splice(0, 6)
         this.botHand = this.currentDeck.splice(0, 6)
     }
 
-    createTrump() {
-        const lastCard = this.currentDeck[this.currentDeck.length - 1]
-        this.trump = lastCard.suit
-    }
-
     firstTurnOwner() {
-        const lowestPlayerTrump = this.getLowestTrump(this.playerHand)
-        const lowestBotTrump = this.getLowestTrump(this.botHand)
+        const playerTrumps = this.playerHand.filter(card => card.isTrump)
+        const botTrumps = this.botHand.filter(card => card.isTrump)
 
-        if ((!lowestPlayerTrump && lowestBotTrump) || 
-        (lowestPlayerTrump && lowestBotTrump && lowestPlayerTrump.rank > lowestBotTrump.rank)) {
+        let minPlayerTrump = null
+        if (playerTrumps.length > 0) { minPlayerTrump = this.getWeakestCard(playerTrumps) }
+
+        let minBotTrump = null
+        if (botTrumps.length > 0) { minBotTrump = this.getWeakestCard(botTrumps) }
+
+        if ((!minPlayerTrump && minBotTrump) || 
+            (minPlayerTrump && minBotTrump && minPlayerTrump.power > minBotTrump.power)) {
             this.isPlayerTurn = false
         } else { this.isPlayerTurn = true }
     }
 
-    getLowestTrump(hand) {
-        let lowestTrump = null;
+    getWeakestCard(cards) {
+        if (cards.length === 0) return null
         
-        for (const card of hand) {
-            if (card.suit === this.trump) {
-                if (!lowestTrump || parseInt(card.id) < parseInt(lowestTrump.id)) {
-                    lowestTrump = card;
-                }
-            }
+        let weakestCard = cards[0]
+        for (let i = 1; i < cards.length; i++) {
+            if (cards[i].power < weakestCard.power) { weakestCard = cards[i] }
         }
-        
-        return lowestTrump;
+        return weakestCard
     }
 }
 
