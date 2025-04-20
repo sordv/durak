@@ -13,7 +13,7 @@
     <!-- боковое меню с инофрмацией об игре -->
     <div class="game-info">
         <div class="deck-area">
-            <div class="card">
+            <div class="showing1" style="display: none;">
                 {{#each currentDeck}}
                 {{#if @last}}
                 <img src="{{this.skin}}" class="card" alt="trump: {{this.suit}} {{this.rank}}">
@@ -21,11 +21,11 @@
                 {{/each}}
             </div>
 
-            <div class="deck-count">
+            <div class="deck-count showing1" style="display: none;">
                 {{currentDeck.length}}
             </div>
 
-            <div class="card">
+            <div class="card showing2" style="display: none;">
                 <img src="icons/game/{{this.trump}}.png" class="card" alt="trump: {{this.trump}}">
             </div>
 
@@ -36,6 +36,8 @@
                     <p class="deck-count">верхний</p>
                 {{/if}}
             </div>
+
+            <a href="/"><button class="button-icon button-icon-delete"></button></a>
         </div>
     </div>
 
@@ -65,7 +67,5 @@
         </div>
     </div>
 </div>
-
-<a href="/"><button class="game-button-exit">Выход</button></a>
 
 <script src="/scripts/gameController.js"></script>

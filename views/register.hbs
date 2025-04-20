@@ -1,18 +1,14 @@
-<h1>Регистрация аккаунта</h1>
+<div class="authorization-page">
+    <p class="authorization-label">Регистрация аккаунта</p>
 
-<form action="/register" method="POST">
-    <label for="login">Логин:</label><br>
-    <input type="text" id="login" name="login" required><br><br>
+    <form action="/register" method="POST" class="authorization-form">
+        <input type="text" id="login" name="login" placeholder="Логин" required>
+        <input type="password" id="password" name="password" placeholder="Пароль" required>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Повторите пароль" required>
+        <input type="submit" value="Зарегистрироваться">
+    </form>
 
-    <label for="password">Пароль:</label><br>
-    <input type="password" id="password" name="password" required><br><br>
+    <p class="auth-foot">Есть аккаунт? <a href="/login" class="auth-link">Войдите!</a></p>
+</div>
 
-    <label for="confirm_password">Повторите пароль:</label><br>
-    <input type="password" id="confirm_password" name="confirm_password" required><br><br>
-
-    <input type="submit" value="Зарегистрироваться">
-</form>
-
-<h4>Есть аккаунт? <a href="/login">Войдите!</a></h4>
-
-<a href="/">Назад</a>
+<a href="/"><button class="button-icon button-icon-back"></button></a>

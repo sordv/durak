@@ -5,9 +5,9 @@ const pool = require('../database')
 // рендер таблицы лидеров
 router.get('/scoreboard', async (req, res) => {
     try {
-        // запрос на 5 самых лучших по рейтингу
+        // запрос на самых лучших по рейтингу
         const result = await pool.query(
-            'SELECT login, rating, wins FROM players ORDER BY rating DESC LIMIT 5'
+            'SELECT login, rating, wins FROM players ORDER BY rating DESC'
         )
         const players = result.rows
 

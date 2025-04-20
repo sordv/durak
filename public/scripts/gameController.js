@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // получение общих элементов
+    // получение элементов для перемещения карт и обновления deck-area
     const tableArea = document.querySelector('.table-area')
     const playerArea = document.querySelector('.player-area')
     const botArea = document.querySelector('.bot-area')
@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const botCards = document.querySelector('.bot-cards')
     const turnIndicator = document.querySelector('.turn-indicator p')
     const deckCountElement = document.querySelector('.deck-count')
+    const deckArea = document.querySelector('.deck-area')
+    const showing1Elements = deckArea?.querySelectorAll('.showing1') || []
+    const showing2Elements = deckArea?.querySelectorAll('.showing2') || []
     
     // флаг "нажал ли игрок кнопку "взять""
     let takeButtonClicked = false
@@ -22,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return
         }
         
+        updateDeckArea() // обновляем состояние deck-area
         setupTableObserver() // создаем наблюдатель за столом
         setupCardInteractions() // "настройка" выданных карт
         updateTurnIndicator() // обновление индикатора того, чей ход
@@ -30,12 +34,28 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDeckCount() // обновление счетчика оставшихся в колоде карт
     }
 
+    // функция для обновления отображения deck-area
+    function updateDeckArea() {
+        // если есть объект с данными игры, а в нем текущая колода
+        const deckLength = window.gameData?.currentDeck?.length || 0
+        
+        if (deckLength > 0) {
+            showing1Elements.forEach(i => i.style.display = 'block') // отобразить
+            showing2Elements.forEach(i => i.style.display = 'none') // скрыть
+        } else {
+            showing1Elements.forEach(i => i.style.display = 'none') // скрыть
+            showing2Elements.forEach(i => i.style.display = 'block') // отобразить
+        }
+    }
+
     // обновление числа оставшихся в колоде карт
     function updateDeckCount() {
         // если существует (элемент для отображения числа карт в разметке) и (текущая колода в данных игры)
         if (deckCountElement && window.gameData?.currentDeck) {
             // значение элемента разметке = длина текущей колоды в игре
             deckCountElement.textContent = window.gameData.currentDeck.length
+            // обновление состояния deck-area
+            updateDeckArea()
         }
     }
     
@@ -70,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDeckCount()
         // "настройка" выданных карт
         setupCardInteractions()
+        // обновляем состояние deck-area
+        updateDeckArea()
     }
     
     // добавление карт из колоды конкретному игроку
@@ -102,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             targetHand.appendChild(cardElement)
         })
         updateDeckCount()
+        updateDeckArea()
     }
     
     // настройка карт

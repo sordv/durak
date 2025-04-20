@@ -1,15 +1,13 @@
-<h1>Вход в аккаунт</h1>
+<div class="authorization-page">
+    <p class="authorization-label">Вход в аккаунт</p>
 
-<form action="/login" method="POST">
-    <label for="login">Логин:</label><br>
-    <input type="text" id="login" name="login" required><br><br>
+    <form action="/login" method="POST" class="authorization-form">
+        <input type="text" id="login" name="login" placeholder="Логин" required>
+        <input type="password" id="password" name="password" placeholder="Пароль" required>
+        <input type="submit" value="Войти">
+    </form>
 
-    <label for="password">Пароль:</label><br>
-    <input type="password" id="password" name="password" required><br><br>
+    <p class="auth-foot">Нет аккаунта? <a href="/register" class="auth-link">Зарегистрируйтесь!</a></p>
+</div>
 
-    <input type="submit" value="Войти">
-</form>
-
-<h4>Нет аккаунта? <a href="/register">Зарегистрируйтесь!</a></h4>
-
-<a href="/">Назад</a>
+<a href="/"><button class="button-icon button-icon-back"></button></a>

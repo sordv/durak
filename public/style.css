@@ -4,6 +4,54 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #356b51;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 2px, transparent 2px);
+    background-size: 60px 60px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* BUTTON ICONS - START */
+
+.button-icon {
+    width: 70px;
+    height: 70px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+    transition: transform 0.25s;
+}
+
+.button-icon:hover {
+    transform: scale(1.15);
+}
+
+.button-icon-delete {
+    background-image: url("/icons/interface/delete.svg");
+    position: relative;
+}
+
+.button-icon-login {
+    background-image: url("/icons/interface/login.svg");
+}
+
+.button-icon-logout {
+    background-image: url("/icons/interface/logout.svg");
+}
+
+.button-icon-back {
+    background-image: url("/icons/interface/back.svg");
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+}
+
+/* BUTTON ICONS - END */
+
 /* MAIN MENU - START */
 
 .main-menu-name {
@@ -14,7 +62,7 @@
     margin-bottom: 30vh;
 }
 
-.main-menu {
+.main-menu-buttons {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,37 +71,191 @@
 
 .main-menu-button-game {
     padding: 20px 90px;
-    font-size: 28px;
-    color: white;
-    background-color: #007bff;
+    font-size: 40px;
+    color: #f5f5dc;
+    background-color: #292929;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 20px;
-    transition: background-color 0.3s;
+    margin-bottom: 25px;
+    transition: transform 0.25s;
 }
 
 .main-menu-button-game:hover {
-    background-color: #0056b3;
+    transform: scale(1.07);
 }
 
 .main-menu-button-scoreboard {
-    padding: 10px 24px;
-    font-size: 20px;
-    color: white;
-    background-color: #007bff;
+    padding: 14px 24px;
+    font-size: 22px;
+    color: #f5f5dc;
+    background-color: #292929;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: transform 0.25s;
 }
 
 .main-menu-button-scoreboard:hover {
-    background-color: #0056b3;
+    transform: scale(1.085);
+}
+
+.check-login-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.check-login-label {
+    color: #f5f5dc;
+    font-size: 20px;
 }
 
 /* MAIN MENU - END */
 
+/* AUTHORIZATION MENU - START */
+.authorization-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.authorization-label {
+    color: #f5f5dc;
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.authorization-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.authorization-form input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #292929;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    background-color: #f5f5dc;
+}
+
+.authorization-form input[type="submit"] {
+    background-color: #292929;
+    padding: 12px;
+    color: #f5f5dc;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.auth-foot {
+    margin-bottom: 0;
+    color: #f5f5dc;
+    font-size: 20px;
+}
+
+.auth-link {
+    color: #c4e0eb;
+}
+
+/* AUTHORIZATION MENU - END */
+
 /* SCOREBOARD MENU - START */
+
+.scoreboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.scoreboard-label {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #f5f5dc;
+}
+
+.scoreboard-table {
+    color: #f5f5dc;
+    width: 60vw;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: rgba(41, 41, 41, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.scoreboard-table th {
+    font-size: 20px;
+    text-align: center;
+    background-color: #292929;
+    color: #f5f5dc;
+    padding: 15px;
+    border-bottom: 1px solid #356b51;
+}
+
+.scoreboard-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #356b51;
+    font-size: 18px;
+}
+
+.scoreboard-table tr:last-child td {
+    border-bottom: none;
+}
+
+.scoreboard-table tr:hover {
+    background-color: rgba(53, 107, 81, 0.3);
+}
+
+/* sort*/
+.scoreboard-table th.sortable {
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.scoreboard-table th.sortable:hover {
+    background-color: rgba(41, 41, 41, 0.3);
+}
+
+.scoreboard-table th.sortable::after {
+    content: "▼";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.scoreboard-table th.sortable:hover::after {
+    opacity: 1;
+}
+
+.scoreboard-table th.sortable.sorted-asc::after {
+    content: "▲";
+    opacity: 1;
+}
+
+.scoreboard-table th.sortable.sorted-desc::after {
+    content: "▼";
+    opacity: 1;
+}
 
 /* SCOREBOARD MENU - END */
 
@@ -67,11 +269,11 @@
 
 .game-info {
     width: 200px;
-    background-color: #f5f5dc;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: rgb(99, 62, 99);
 }
 
 .deck-area {
@@ -83,7 +285,7 @@
 }
 
 .deck-count {
-    color: black;
+    color: #f5f5dc;
     font-weight: bold;
     font-size: 24px;
 }
@@ -92,14 +294,12 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    background-color: antiquewhite;
 }
 
 .bot-area {
     display: flex;
     justify-content: center;
     padding: 20px 20px 0 20px;
-    background-color: rgb(169, 255, 186);
     height: 20vh;
 }
 
@@ -107,19 +307,19 @@
     display: flex;
     justify-content: center;
     padding: 0 20px 20px 20px;
-    background-color: rgb(169, 255, 186);
     height: 20vh;
 }
 
 .player-cards, .bot-cards {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .card {
     width: 59px;
     height: 98px;
     object-fit: cover;
+    border-radius: 8px;
 }
 
 .jump-card:hover {
@@ -141,18 +341,8 @@
     justify-content: center;
     align-items: center;
     border: 2px solid red;
-    gap: 10px;
+    gap: 50px;
 }
-
-.game-button-exit {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-/* GAME - END */
 
 .dragging {
     opacity: 0.5;
@@ -163,20 +353,23 @@
     display: flex;
     gap: 5px;
     margin: 5px;
-}
-
-.attack-slot, .defense-slot {
-    width: 59px;
-    height: 98px;
-    border-radius: 5px;
+    position: relative;
 }
 
 .attack-slot {
-    background-color: rgba(255, 0, 0, 0.1);
+    width: 59px;
+    height: 98px;
+    z-index: 1;
 }
 
 .defense-slot {
-    background-color: rgba(0, 255, 0, 0.1);
+    width: 59px;
+    height: 98px;
+    z-index: 2;
+    position: absolute;
+    left: 65%;
+    top: 20%;
+    transform: rotate(18deg);
 }
 
 .card-slot img {
@@ -192,7 +385,7 @@
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
-    color: white;
+    color: #f5f5dc;
     transition: all 0.2s;
 }
 
@@ -212,3 +405,17 @@
 .pass-button {
     background-color: #db3b30;
 }
+
+/* GAME - END */
+
+/* NOT USABLE - START
+
+.attack-slot {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.defense-slot {
+    background-color: rgba(0, 255, 0, 0.1);
+    }
+
+ NOT USABLE - END*/

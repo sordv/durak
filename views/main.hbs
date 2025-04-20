@@ -1,0 +1,18 @@
+<p class="main-menu-name">DURAK</p>
+
+<div class='main-menu-buttons'>
+    <a href='/game'><button class='main-menu-button-game'>Играть</button></a>
+    <a href='/scoreboard'><button class='main-menu-button-scoreboard'>Таблица лидеров</button></a>
+</div>
+
+<div class="check-login-area">
+    {{#if isLogin}}
+    <p class="check-login-label">{{login}}</p>
+    <form action="/logout" method="POST" style="display: inline;">
+        <button type="submit" class="button-icon button-icon-logout"></button>
+    </form>
+    {{else}}
+    <p class="check-login-label">Вход не выполнен!</p>
+    <a href="/login"><button class="button-icon button-icon-login"></button></a>
+    {{/if}}
+</div>

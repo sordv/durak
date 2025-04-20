@@ -1,22 +1,26 @@
-<p>Таблица лидеров</p>
+<div class="scoreboard-container">
+    <p class="scoreboard-label">Таблица лидеров</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Логин</th>
-            <th>Рейтинг</th>
-            <th>Победы</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each players}}
-        <tr>
-            <td>{{this.login}}</td>
-            <td>{{this.rating}}</td>
-            <td>{{this.wins}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+    <table class="scoreboard-table">
+        <thead>
+            <tr>
+                <th>Логин</th>
+                <th class="sortable" data-sort="rating">Рейтинг</th>
+                <th class="sortable" data-sort="wins">Победы</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each players}}
+            <tr>
+                <td>{{this.login}}</td>
+                <td data-rating="{{this.rating}}">{{this.rating}}</td>
+                <td data-wins="{{this.wins}}">{{this.wins}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
 
-<a href="/">Назад</a>
+<a href="/"><button class="button-icon button-icon-back"></button></a>
+
+<script src="/scripts/scoreboardSorting.js"></script>
