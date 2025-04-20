@@ -1,12 +1,16 @@
 <script>
-    const gameState = {
+    // глобальный объект со всеми переменными, которые отправляются из gameRoutes.js
+    window.gameData = {
         isPlayerTurn: {{isPlayerTurn}},
         playerHand: {{{json playerHand}}},
-        botHand: {{{json botHand}}}
+        botHand: {{{json botHand}}},
+        currentDeck: {{{json currentDeck}}},
+        trumpSuit: "{{trump}}"
     }
 </script>
 
 <div class="all-visual">
+    <!-- боковое меню с инофрмацией об игре -->
     <div class="game-info">
         <div class="deck-area">
             <div class="card">
@@ -35,23 +39,27 @@
         </div>
     </div>
 
+    <!-- экран игры -->
     <div class="game-container">
+        <!-- зона верхнего игрока -->
         <div class="bot-area">
             <div class="bot-cards">
                 {{#each botHand}}
-                <img src="{{this.skin}}" class="card down-jump-card" alt="{{this.suit}} {{this.rank}}" data-card-id="{{this.id}}">
+                <img src="{{this.skin}}" class="card down-jump-card" alt="{{this.suit}} {{this.rank}}" data-suit="{{this.suit}}" data-rank="{{this.rank}}">
                 {{/each}}
             </div>
         </div>
 
+        <!-- зона играемых карт -->
         <div class="table-area">
-                <!-- Слоты создаются в gameLogic.js -->
+            <!-- динамические заполняется скриптом -->
         </div>
 
+        <!-- зона нижнего игрока -->
         <div class="player-area">
             <div class="player-cards">
                 {{#each playerHand}}
-                <img src="{{this.skin}}" class="card jump-card" alt="{{this.suit}} {{this.rank}}" data-card-id="{{this.id}}">
+                <img src="{{this.skin}}" class="card jump-card" alt="{{this.suit}} {{this.rank}}" data-suit="{{this.suit}}" data-rank="{{this.rank}}">
                 {{/each}}
             </div>
         </div>
@@ -60,4 +68,4 @@
 
 <a href="/"><button class="game-button-exit">Выход</button></a>
 
-<script src="/scripts/cardController.js"></script>
+<script src="/scripts/gameController.js"></script>

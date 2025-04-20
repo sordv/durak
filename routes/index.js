@@ -1,14 +1,11 @@
-const express = require('express')
-const mainRoutes = require('./mainRoutes')
-const authorizationRoutes = require('./authorizationRoutes')
-const scoreboardRoutes = require('./scoreboardRoutes')
-const gameRoutes = require('./gameRoutes')
+// главный роутер к которому присоединяются все остальные
 
+const express = require('express')
 const router = express.Router()
 
-router.use('/', mainRoutes)
-router.use('/', authorizationRoutes)
-router.use('/', scoreboardRoutes)
-router.use('/', gameRoutes)
+router.use('/', require('./mainRoutes'))
+router.use('/', require('./authorizationRoutes'))
+router.use('/', require('./scoreboardRoutes'))
+router.use('/', require('./gameRoutes'))
 
 module.exports = router
