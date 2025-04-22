@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // флаг "нажал ли игрок кнопку "взять""
     let takeButtonClicked = false
     let isProcessingAction = false
+    let isGameEnd = false
     
     // запуск скрипта
     initGameController()
@@ -129,6 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // настройка карт
     function setupCardInteractions() {
+        // метод не выполняется если игра закончилась
+        if (isGameEnd) { return }
         try {
             // клонирование каждой карты для сброса старых event listeners
             document.querySelectorAll('.player-cards .card, .bot-cards .card').forEach(card => {
@@ -230,6 +233,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // сыграть карту как атакующую
     function handleAttack(card) {
+        // метод не выполняется если игра закончилась
+        if (isGameEnd) { return }
         const currentTurn = getCurrentTurn() // определяем владельца хода
         const isPlayerCard = card.parentElement === playerCards // определяем принадлежность карты к нижнему игроку
         // если карту пытаются сыграть не в свой ход
@@ -272,10 +277,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // создаем карточный слот если их еще не 6
         if (slots.length < 6) { createNewSlot() }
+
+        // если у игрока не осталось больше карт, то вызовем проверку конца игры
+        if (window.gameData[handKey].length === 0) { if (checkGameEnd()) return }
     }
     
     // сыграть карту как защищающую
     function handleDefense(card, targetSlot = null) {
+        // метод не выполняется если игра закончилась
+        if (isGameEnd) { return }
         const slots = getSlots()
         let defSlot = null
         let attCardElement = null
@@ -321,8 +331,72 @@ document.addEventListener('DOMContentLoaded', () => {
         const cardCopy = card.cloneNode(true)
         cardCopy.classList.remove('jump-card', 'down-jump-card', 'dragging')
         defSlot.appendChild(cardCopy)
+
+        // если у игрока не осталось больше карт, то вызовем проверку конца игры
+        if (window.gameData[handKey].length === 0) { if (checkGameEnd()) return }
     }
     
+    // проверяем закончилась ли игра
+    function checkGameEnd() {
+        // узнаем пустые ли руки у игроков
+        const emptyPlayerHand = playerCards.children.length === 0
+        const emptyBotHand = botCards.children.length === 0
+        // если одна из рук пуста и в колоде больше нет карт, то игра кончилась
+        if ((emptyPlayerHand || emptyBotHand) && window.gameData.currentDeck.length === 0) {
+            // победитель тот, у кого пустая рука
+            // не предусмотрена возможность ничьи
+            // по механике ходьбы картами одномоментно две руки пустыми оказатся не могут
+            const winner = emptyPlayerHand ? 'player' : 'bot'
+            isGameEnd = true
+            window.gameData.isGameEnd = true
+            // обработка завершения игры
+            handleGameEnd(winner)
+            return true
+        }
+        return false
+    }
+
+    // обработка завершения игры
+    function handleGameEnd(winner) {
+        // запрос о завершении игры
+        // Отправляем запрос на сервер о завершении игры
+        fetch('/game/end', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ winner: winner })
+        }).catch(err => console.error('req update ends failed with:', err))
+
+        // скрываем кнопку выхода из игры
+        document.querySelector('.button-icon-delete').style.display = 'none'
+        // скрываем кнопки действий
+        document.querySelectorAll('.action-button').forEach(btn => btn.remove())
+        // выключаем действия с картами
+        document.querySelectorAll('.card').forEach(card => {
+            card.draggable = false;
+            card.style.pointerEvents = 'none';
+            card.style.opacity = '0.7';
+        })
+        // очищаем игровую зону
+        tableArea.innerHTML = ''
+        // создаем сообщение о конце игры
+        const endGameMessage = document.querySelector('.end-game-message')
+        const winnerNameElement = endGameMessage.querySelector('.winner-name')
+        winnerNameElement.textContent = winner === 'player' ? 'игрок' : 'бот'
+
+        document.getElementById('restart-button').addEventListener('click', () => {
+            window.location.href = '/game/restart'
+        })
+    
+        document.getElementById('menu-button').addEventListener('click', () => {
+            window.location.href = '/'
+        })
+    
+        // Показываем сообщение
+        endGameMessage.style.display = 'block'
+    }
+
     // получаем все слоты под карты на столе
     function getSlots() {
         return Array.from(document.querySelectorAll('.card-slot'))

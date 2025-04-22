@@ -5,7 +5,8 @@
         playerHand: {{{json playerHand}}},
         botHand: {{{json botHand}}},
         currentDeck: {{{json currentDeck}}},
-        trumpSuit: "{{trump}}"
+        trumpSuit: "{{trump}}",
+        isGameEnd: {{isGameEnd}} || false
     }
 </script>
 
@@ -55,6 +56,13 @@
         <!-- зона играемых карт -->
         <div class="table-area">
             <!-- динамические заполняется скриптом -->
+        </div>
+
+        <!-- зона отображения конца игры -->
+        <div class="end-game-message" style="display: none;">
+            <h2>Победил <span class="winner-name"></span>!</h2>
+            <button class="end-game-button" id="restart-button">Рестарт</button>
+            <button class="end-game-button" id="menu-button">В меню</button>
         </div>
 
         <!-- зона нижнего игрока -->

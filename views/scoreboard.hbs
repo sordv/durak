@@ -1,24 +1,60 @@
 <div class="scoreboard-container">
     <p class="scoreboard-label">Таблица лидеров</p>
+    <!-- Таблиа лидеров: кол-во начатых и законченых игр -->
+    <div class="scoreboard-table-wrapper">
+        <table class="scoreboard-table scoreboard-table-header">
+            <thead>
+                <tr>
+                    <th>Логин</th>
+                    <th class="sortable" data-sort="starts">Начато игр</th>
+                    <th class="sortable" data-sort="ends">Закончено игр</th>
+                </tr>
+            </thead>
+        </table>
+        
+        <div class="scoreboard-table-container">
+            <table class="scoreboard-table scoreboard-table-body">
+                <tbody>
+                    {{#each players}}
+                    <tr>
+                        <td>{{this.login}}</td>
+                        <td data-starts="{{this.starts}}">{{this.starts}}</td>
+                        <td data-ends="{{this.ends}}">{{this.ends}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <table class="scoreboard-table">
-        <thead>
-            <tr>
-                <th>Логин</th>
-                <th class="sortable" data-sort="rating">Рейтинг</th>
-                <th class="sortable" data-sort="wins">Победы</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each players}}
-            <tr>
-                <td>{{this.login}}</td>
-                <td data-rating="{{this.rating}}">{{this.rating}}</td>
-                <td data-wins="{{this.wins}}">{{this.wins}}</td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+    <!-- Таблица лидеров: рейтинг и победы -->
+    <!--
+    <div class="scoreboard-table-wrapper">
+        <table class="scoreboard-table scoreboard-table-header">
+            <thead>
+                <tr>
+                    <th>Логин</th>
+                    <th class="sortable" data-sort="rating">Рейтинг</th>
+                    <th class="sortable" data-sort="wins">Победы</th>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="scoreboard-table-container">
+            <table class="scoreboard-table scoreboard-table-body">
+                <tbody>
+                    {{#each players}}
+                    <tr>
+                        <td>{{this.login}}</td>
+                        <td data-rating="{{this.rating}}">{{this.rating}}</td>
+                        <td data-wins="{{this.wins}}">{{this.wins}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    -->
 </div>
 
 <a href="/"><button class="button-icon button-icon-back"></button></a>

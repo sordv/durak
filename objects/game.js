@@ -9,6 +9,7 @@ class Game {
         this.botHand = [] // рука верхнего игрока
         this.trump = null // тут определиться козырная масть
         this.isPlayerTurn = null // логическое значение: "ходит ли сейчас нижний игрок"
+        this.isGameEnd = false // логическое значение: "игра закончилась"
         this.createTrump() // определить козырь
         this.getStartCards() // раздать игрокам по 6 карт
         this.firstTurnOwner() // определить кто первый начнет ходить
