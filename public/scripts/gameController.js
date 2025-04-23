@@ -642,6 +642,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isProcessingAction) return // закончит метод если уже активно
         isProcessingAction = true // начало операции
         
+        enableCards() // включаем игроку карты
         moveCardsToDefender() // передать карты защищающемуся игроку
         takeButtonClicked = false // снимаем флаг с кнопки "взять"
         dealCards() // раздать карты из колоды
@@ -655,9 +656,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // нажатие на кнопку "взять"
     function handleTakeClick() {
         takeButtonClicked = true // поставить флаг на кнопку
+        disableCards() // отключаем карты игроку
         updateActionButtons() // обновить состояние кнопок действий
     }
     
+    // делаем карты текущего игрока недоступными
+    function disableCards() {
+        const cardsArea = window.gameData.isPlayerTurn ? botCards : playerCards
+
+        cardsArea.querySelectorAll('.card').forEach(card => {
+            card.style.pointerEvents = 'none'
+            card.style.opacity = '0.7'
+            card.draggable = false
+        })
+    }
+
+    // делаем карты текущего игрока доступными
+    function enableCards() {
+        const cardsArea = window.gameData.isPlayerTurn ? botCards : playerCards
+        
+        cardsArea.querySelectorAll('.card').forEach(card => {
+            card.style.pointerEvents = 'auto'
+            card.style.opacity = '1'
+            card.draggable = true
+        })
+    }
+
     // очистить стол
     function clearTable() {
         // удалить карты из всех слотов
