@@ -68,10 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // обновление индикатора владельца хода
     function updateTurnIndicator() {
-        // если существует объект для отображения того, чей сейчас ход
-        if (turnIndicator) {
-            // присвоить значение "нижний" если true, иначе "верхний"
-            turnIndicator.textContent = getCurrentTurn() ? 'нижний' : 'верхний'
+        const indicator = document.getElementById('turnIndicator')
+        if (indicator) {
+            indicator.className = getCurrentTurn() ? 
+                'turn-indicator player-turn' : 
+                'turn-indicator bot-turn'
         }
     }
     
@@ -383,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // создаем сообщение о конце игры
         const endGameMessage = document.querySelector('.end-game-message')
         const winnerNameElement = endGameMessage.querySelector('.winner-name')
-        winnerNameElement.textContent = winner === 'player' ? 'игрок' : 'бот'
+        winnerNameElement.textContent = winner === 'player' ? 'НИЖНИЙ ИГРОК' : 'ВЕРХНИЙ ИГРОК'
 
         document.getElementById('restart-button').addEventListener('click', () => {
             window.location.href = '/game/restart'
@@ -567,7 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 createActionButton(
                     window.gameData.isPlayerTurn ? 'player' : 'bot', // появится только у атакующего
                     'beaten', // тип
-                    'Бито', // текст
+                    'БИТО', // текст
                     handleBeatenClick // результат нажатия на кнопку
                 )
             }
@@ -581,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 createActionButton(
                     window.gameData.isPlayerTurn ? 'bot' : 'player', // появится только у защищающегося
                     'take', // тип
-                    'Взять', // текст
+                    'ВЗЯТЬ', // текст
                     handleTakeClick // результат нажатия на кнопку
                 )
             }
@@ -590,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 createActionButton(
                     window.gameData.isPlayerTurn ? 'player' : 'bot', // появится только у атакующего
                     'pass', // тип
-                    'Пас', // текст
+                    'ПАС', // текст
                     handlePassClick // результат нажатия на кнопку
                 )
             }

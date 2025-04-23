@@ -4,7 +4,7 @@ class Card {
         this.rank = rank // значение карты
         this.power = power // сила карты (для сравнения)
         this.isTrump = false // является ли козырем (устанавливается нужным картам во время раздачи)
-        this.skin = `icons/cards/${suit}_${rank}.png` // динамический поиск изображения в папке
+        this.skin = `icons/cards/${suit}_${rank}.svg` // динамический поиск изображения в папке
     }
 }
 

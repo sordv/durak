@@ -13,6 +13,7 @@
 <div class="all-visual">
     <!-- боковое меню с инофрмацией об игре -->
     <div class="game-info">
+        <div id="turnIndicator" class="turn-indicator {{#if isPlayerTurn}}player-turn{{else}}bot-turn{{/if}}">ХОДИТ</div>
         <div class="deck-area">
             <div class="showing1" style="display: none;">
                 {{#each currentDeck}}
@@ -26,16 +27,8 @@
                 {{currentDeck.length}}
             </div>
 
-            <div class="card showing2" style="display: none;">
-                <img src="icons/game/{{this.trump}}.png" class="card" alt="trump: {{this.trump}}">
-            </div>
-
-            <div class="turn-indicator">
-                {{#if isPlayerTurn}}
-                    <p class="deck-count">нижний</p>
-                {{else}}
-                    <p class="deck-count">верхний</p>
-                {{/if}}
+            <div class="showing2" style="display: none;">
+                <img src="icons/game/gray_{{this.trump}}.svg" class="suit-indicator" alt="trump: {{this.trump}}">
             </div>
 
             <a href="/"><button class="button-icon button-icon-delete"></button></a>
@@ -60,9 +53,9 @@
 
         <!-- зона отображения конца игры -->
         <div class="end-game-message" style="display: none;">
-            <h2>Победил <span class="winner-name"></span>!</h2>
-            <button class="end-game-button" id="restart-button">Рестарт</button>
-            <button class="end-game-button" id="menu-button">В меню</button>
+            <h2>ПОБЕДИЛ <span class="winner-name"></span>!</h2>
+            <button class="end-game-button" id="restart-button">РЕСТАРТ</button>
+            <button class="end-game-button" id="menu-button">В МЕНЮ</button>
         </div>
 
         <!-- зона нижнего игрока -->

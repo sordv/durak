@@ -304,26 +304,59 @@ body {
 }
 
 .game-info {
-    width: 200px;
+    width: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgb(99, 62, 99);
+    background-color: rgba(83, 73, 56, 0.676);
 }
 
 .deck-area {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    border: 2px solid red;
+    gap: 20px;
 }
 
 .deck-count {
-    color: #f5f5dc;
+    color: #292929;
     font-weight: bold;
     font-size: 24px;
+}
+
+.suit-indicator {
+    width: 70px;
+    height: 70px;
+}
+
+.turn-indicator {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px 5px 15px;
+    color: #f5f5dc;
+    font-size: 20px;
+}
+
+.turn-indicator::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url("/icons/game/turn_indicator.svg");
+    background-size: contain;
+}
+
+.turn-indicator.player-turn {
+    bottom: 50px;
+    left: 30px;
+}
+
+.turn-indicator.bot-turn {
+    top: 55px;
+    left: 30px;
 }
 
 .game-container {
@@ -352,10 +385,10 @@ body {
 }
 
 .card {
-    width: 59px;
+    width: 60px;
     height: 98px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 .jump-card:hover {
@@ -376,7 +409,6 @@ body {
     flex: 1;
     justify-content: center;
     align-items: center;
-    border: 2px solid red;
     gap: 50px;
 }
 
@@ -448,36 +480,36 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 2rem;
+    background-color: #f5f5dc;
+    padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     z-index: 100;
     display: none;
 }
 
 .end-game-message h2 {
-    color: #333;
-    margin-bottom: 1.5rem;
+    color: #292929;
+    margin-bottom: 18px;
+    font-size: 26px;
 }
 
 .end-game-button {
-    background-color: #4CAF50;
+    background-color: #292929;
     border: none;
-    color: white;
-    padding: 0.5rem 1rem;
+    color: #f5f5dc;
+    padding: 20px;
+    margin: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1rem;
-    margin: 0.5rem;
+    font-size: 22px;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: transform 0.25s;
 }
 
 .end-game-button:hover {
-    background-color: #45a049;
+    transform: scale(1.1);
 }
 
 /* GAME - END */
