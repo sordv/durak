@@ -65,13 +65,38 @@ class Game {
         // удаляем из текущей колоды первые 6 карт и отдаем их на руку
         this.playerHand = this.currentDeck.splice(0, 6)
         this.botHand = this.currentDeck.splice(0, 6)
+        
         this.updateTrumpStatus() // поменяем поле isTrump картам
+
+        this.playerHand = this.sortHand(this.playerHand)
+        this.botHand = this.sortHand(this.botHand)
     }
 
     updateTrumpStatus() {
         // если card.suit равен this.trump, то card.isTrump будет true
         this.playerHand.forEach(card => { card.isTrump = card.suit === this.trump })
         this.botHand.forEach(card => { card.isTrump = card.suit === this.trump })
+    }
+
+    sortHand(hand) {
+        // порядок мастей по умолчанию
+        const suitOrder = {
+            'Hearts': 1,
+            'Diamonds': 2,
+            'Clubs': 3,
+            'Spades': 4
+        }
+        // меняем индекс козырной масти
+        suitOrder[this.trump] = 0
+        // сортировка
+        return hand.sort((a, b) => {
+            // сортировка по масти
+            if (suitOrder[a.suit] !== suitOrder[b.suit]) {
+                return suitOrder[a.suit] - suitOrder[b.suit]
+            }
+            // сортировка по мощности
+            return b.power - a.power
+        })
     }
 
     firstTurnOwner() {

@@ -56,10 +56,10 @@ body {
 
 .main-menu-name {
     text-align: center;
-    font-size: 36px;
-    color: black;
+    font-size: 118px;
+    color: #f5f5dc;
     margin-top: 20px;
-    margin-bottom: 30vh;
+    margin-bottom: 15vh;
 }
 
 .main-menu-buttons {
@@ -382,6 +382,8 @@ body {
 .player-cards, .bot-cards {
     display: flex;
     gap: 15px;
+    max-width: 70vw;
+    flex-wrap: nowrap;
 }
 
 .card {
@@ -389,6 +391,8 @@ body {
     height: 98px;
     object-fit: cover;
     border-radius: 10px;
+    flex: 1;
+    min-width: 0;
 }
 
 .jump-card:hover {
@@ -447,19 +451,19 @@ body {
 }
 
 .action-button {
-    padding: 8px 16px;
-    margin: 10px;
+    padding: 8px 14px;
     border: none;
-    border-radius: 4px;
-    font-size: 14px;
+    margin: 10px;
+    border-radius: 8px;
+    font-size: 16px;
     cursor: pointer;
     color: #f5f5dc;
-    transition: all 0.2s;
+    transition: transform 0.25s;
+    margin-left: 15px;
 }
 
 .action-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transform: scale(1.085);
 }
 
 .beaten-button {

@@ -100,8 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function dealCardsToPlayer(player) {
         // определение того к какой руке нужно добавить карты
         const targetHand = player === 'player' ? playerCards : botCards
-        // удалить
-        const handKey = player === 'player' ? 'playerHand' : 'botHand'
         // сколько карт нужно добавить?
         // если на руке находится больше 6 карт, то выражение 6 - кол-во карт вернет отрицательное число
         // в таком случае добавлять ничего не нужно, поэтому тут max(0, положительно число)
@@ -111,7 +109,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // удаляем карту из текущей колоды и добавляем в cardsToAdd
         const cardsToAdd = window.gameData.currentDeck.splice(0, Math.min(cardsNeeded, window.gameData.currentDeck.length))
         
-        cardsToAdd.forEach(card => {
+        // добавляем карты в соответствующую руку
+        const handKey = player === 'player' ? 'playerHand' : 'botHand'
+        window.gameData[handKey] = window.gameData[handKey].concat(cardsToAdd)
+
+        // сортируем руку
+        window.gameData[handKey] = sortHand(window.gameData[handKey], window.gameData.trumpSuit)
+    
+        // очищаем текущие карты в руке
+        targetHand.innerHTML = ''
+
+        // добавляем отсортированные карты на руку заново
+        window.gameData[handKey].forEach(card => {
             // создаем карту
             const cardElement = document.createElement('img')
             cardElement.src = card.skin
@@ -375,9 +384,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.action-button').forEach(btn => btn.remove())
         // выключаем действия с картами
         document.querySelectorAll('.card').forEach(card => {
-            card.draggable = false;
-            card.style.pointerEvents = 'none';
-            card.style.opacity = '0.7';
+            card.draggable = false
+            card.style.pointerEvents = 'none'
+            card.style.opacity = '0.7'
         })
         // очищаем игровую зону
         tableArea.innerHTML = ''
@@ -744,6 +753,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 defenseCard.classList.add(window.gameData.isPlayerTurn ? 'down-jump-card' : 'jump-card')
                 defenderArea.appendChild(defenseCard)
             }
+        })
+        // сортируем руку
+        window.gameData[defenderHand] = sortHand(window.gameData[defenderHand], window.gameData.trumpSuit)
+        // удаляем карту
+        defenderArea.innerHTML = ''
+        // добавляем отсоритрованные карты заново
+        window.gameData[defenderHand].forEach(card => {
+            const cardElement = document.createElement('img')
+            cardElement.src = card.skin
+            cardElement.className = `card ${window.gameData.isPlayerTurn ? 'down-jump-card' : 'jump-card'}`
+            cardElement.alt = `${card.suit} ${card.rank}`
+            cardElement.dataset.suit = card.suit
+            cardElement.dataset.rank = card.rank
+            cardElement.dataset.power = card.power
+            cardElement.dataset.isTrump = card.isTrump
+            defenderArea.appendChild(cardElement)
+        })
+    }
+
+    function sortHand(hand, trump) {
+        // порядок мастей по умолчанию
+        const suitsOrder = {
+            'Hearts': 1,
+            'Diamonds': 2,
+            'Clubs': 3,
+            'Spades': 4
+        }
+        // меняем индекс козырной масти
+        suitsOrder[trump] = 0
+        // сортировка
+        return hand.sort((a, b) => {
+            // сортировка по масти
+            if (suitsOrder[a.suit] !== suitsOrder[b.suit]) {
+                return suitsOrder[a.suit] - suitsOrder[b.suit]
+            }
+            // сортировка по мощности
+            return b.power - a.power
         })
     }
 })
